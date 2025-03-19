@@ -5,6 +5,9 @@
     --progress-color: #FFD700; /* Yellow progress bars */
     --background-color: #f9f9f9;
 }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
