@@ -337,9 +337,10 @@ body {
     .profile-timeline {
       padding-left: 1.5rem;
     }
-      .profile-timeline::before {
+    .profile-timeline::before {
         left: 15px; /* Adjusted for mobile alignment */
     }
+    
     .profile-timeline-icon {
       left: -15px;
       width: 40px;
@@ -442,6 +443,9 @@ body {
 @media (max-width: 768px) {
     .exp-timeline {
         padding-left: 1.5rem;
+    }
+    .exp-timeline::before {
+        left: 15px; /* Adjusted for mobile alignment */
     }
     .exp-timeline-icon {
         left: -15px;
