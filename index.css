@@ -4,6 +4,14 @@
     --accent-color: #767676;
     --progress-color: #FFD700; /* Yellow progress bars */
     --background-color: #f9f9f9;
+
+    --primary-bg-start: #1f105c;
+    --primary-bg-end: #3e1f7a;
+    --accent-primary: #ff4081;
+    --accent-secondary: #00e5ff;
+    --accent-tertiary: #a37eff;
+    --text-light: #e0e0ff;
+    --text-medium: #b0b0d0;
 }
 html {
     scroll-behavior: smooth;
@@ -270,7 +278,7 @@ body {
 .contact-section {
     background: var(--primary-color);
     color: white;
-    padding: 6rem 6%;
+    padding: 2.5rem 6%;
 }
 
 @media (max-width: 768px) {
@@ -607,56 +615,83 @@ body {
     margin-right:8px ;
 }
 
-/* contact section */
+/* --- Contact Section --- */
+.contact-section {
+    /* Use the variables added to :root */
+    background: linear-gradient(120deg, var(--primary-bg-start) 0%, var(--primary-bg-end) 100%);
+    color: var(--text-light); /* Use the light text color */
+    
+}
+
+/* Ensure the section title in contact is white */
+#contact .section-title {
+    color: #ffffff; /* Explicitly white */
+}
+
+
+.contact-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: none;
+    color: #ffffff; /* Icon color */
+    text-decoration: none;
+}
 
 .contact-icon {
-    position: relative;
-    display: inline-block;
-    transition: all 0.3s ease;
-  }
-  
-  /* Icon base style */
-  .contact-icon i {
-    transition: all 0.3s ease;
-  }
-  
-  /* Glow effect on icon hover */
-  .contact-icon:hover i {
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-  }
-  
-  /* Create a glowing pseudo-element */
-  .contact-icon::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
+    font-size: 1.8rem;
     transition: transform 0.3s ease;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-  }
-  
-  /* Scale up the pseudo-element on hover to enhance the glow */
-  .contact-icon:hover::before {
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  
-  /* Optional: Add some spacing and styling for the contact items */
-  .contact-item {
-    margin-bottom: 20px;
-  }
-  
-  .contact-item p,
-  .contact-item a {
-    color: #ffffff;
-    margin-top: 10px;
-    font-size: 1rem;
+}
+
+.contact-icon-wrapper:hover,
+.contact-icon-wrapper:focus {
+    transform: scale(1.15) rotate(15deg);
+    box-shadow: 0 8px 25px rgba(255, 64, 129, 0.4); /* Using accent-primary color for shadow */
+    outline: none;
+}
+
+.contact-icon-wrapper:hover .contact-icon,
+.contact-icon-wrapper:focus .contact-icon {
+    transform: rotate(-15deg);
+}
+
+.contact-info {
+    margin-top: 1.5rem; /* Or adjust as needed */
+}
+
+.contact-info a {
+    color: var(--text-light); /* Use light text color */
     text-decoration: none;
-  }
-  
-  .contact-item a:hover {
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.contact-info a:hover,
+.contact-info a:focus {
+    color: var(--accent-secondary); /* Use accent color for hover */
     text-decoration: underline;
-  }
+    outline: none;
+}
+
+/* --- Scroll Animation Classes (Ensure these exist or add them) --- */
+/* If you don't have these from gopal.css, add them */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px); /* Or your preferred transform */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+/* Your JS should add the 'is-visible' or 'visible' class */
+.animate-on-scroll.is-visible, /* If using gopal's JS */
+.animate-on-scroll.visible /* If using rao's JS */
+{
+    opacity: 1;
+    transform: translateY(0);
+}
