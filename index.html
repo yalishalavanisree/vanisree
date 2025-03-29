@@ -349,37 +349,41 @@
         </div>
     </section>
 
-   <!-- Contact Section -->
-<section id="contact" class="contact-section py-5">
+  <!-- Contact Section -->
+<section id="contact" class="contact-section section-padding">
     <div class="container text-center">
-      <h2 class="section-title text-white mb-5">Contact Me</h2>
-      <div class="row justify-content-center g-4">
-        
-        <div class="col-md-4">
-          <div class="contact-item text-center">
-            <a href="mailto:yalishalavanisree@gmail.com" class="contact-icon">
-                    <i class="fas fa-envelope fa-2x"></i>
-                </a>
-                <p>
-                  <a href="mailto:yalishalavanisree@gmail.com">yalishalavanisree@gmail.com</a>
-                </p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="contact-item text-center">
-              <a href="https://www.linkedin.com/in/yalishala-vanisree-275962276?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" class="contact-icon">
-                    <i class="fab fa-linkedin fa-2x"></i>
-            </a>
-            <div>
-              <a href="https://www.linkedin.com/in/yalishala-vanisree-275962276?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
-                Linked In
-              </a>
+        <h2 class="section-title text-white mb-5 animate-on-scroll">Contact Me</h2>
+        <div class="row justify-content-center g-5">
+
+            <!-- Email -->
+            <div class="col-md-4 animate-on-scroll" data-animation-delay="100">
+                <div class="contact-item text-center">
+                    <a href="mailto:yalishalavanisree@gmail.com" class="contact-icon-wrapper">
+                        <i class="fas fa-envelope contact-icon"></i>
+                    </a>
+                    <p class="contact-info mt-3">
+                        <a href="mailto:yalishalavanisree@gmail.com">yalishalavanisree@gmail.com</a>
+                    </p>
+                </div>
             </div>
-          </div>
+            <!-- LinkedIn -->
+            <div class="col-md-4 animate-on-scroll" data-animation-delay="200">
+                <div class="contact-item text-center">
+                    <a href="https://www.linkedin.com/in/vanisree-yalishala-275962276/"
+                       target="_blank" rel="noopener noreferrer" class="contact-icon-wrapper">
+                        <i class="fab fa-linkedin contact-icon"></i>
+                    </a>
+                    <p class="contact-info mt-3">
+                        <a href="https://www.linkedin.com/in/vanisree-yalishala-275962276/"
+                           target="_blank" rel="noopener noreferrer">
+                            LinkedIn Profile
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-4">
@@ -439,6 +443,21 @@
             });
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    const scrollTrigger = () => {
+      elements.forEach((el) => {
+        const elementPosition = el.getBoundingClientRect().top;
+        if (elementPosition < window.innerHeight - 100) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    window.addEventListener("scroll", scrollTrigger);
+    scrollTrigger(); // Run once on load
+  });
+    
     </script>
 </body>
 </html>
