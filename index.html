@@ -351,36 +351,76 @@
 
   <!-- Contact Section -->
 <section id="contact" class="contact-section section-padding">
-    <div class="container text-center">
-        <h2 class="section-title text-white mb-5 animate-on-scroll">Contact Me</h2>
-        <div class="row justify-content-center g-5">
+    <div class="container">
+        <h2 class="section-title text-white mb-5 text-center animate-on-scroll">Contact Me</h2>
+        <div class="row justify-content-center align-items-stretch g-lg-5"> <!-- Use larger gutter for large screens -->
 
-            <!-- Email -->
-            <div class="col-md-4 animate-on-scroll" data-animation-delay="100">
-                <div class="contact-item text-center">
-                    <a href="mailto:yalishalavanisree@gmail.com" class="contact-icon-wrapper">
-                        <i class="fas fa-envelope contact-icon"></i>
-                    </a>
-                    <p class="contact-info mt-3">
-                        <a href="mailto:yalishalavanisree@gmail.com">yalishalavanisree@gmail.com</a>
-                    </p>
-                </div>
-            </div>
-            <!-- LinkedIn -->
-            <div class="col-md-4 animate-on-scroll" data-animation-delay="200">
-                <div class="contact-item text-center">
-                    <a href="https://www.linkedin.com/in/vanisree-yalishala-275962276/"
-                       target="_blank" rel="noopener noreferrer" class="contact-icon-wrapper">
-                        <i class="fab fa-linkedin contact-icon"></i>
-                    </a>
-                    <p class="contact-info mt-3">
-                        <a href="https://www.linkedin.com/in/vanisree-yalishala-275962276/"
-                           target="_blank" rel="noopener noreferrer">
-                            LinkedIn Profile
+            <!-- Left Container: Contact Details -->
+            <div class="col-lg-5 h-100 mb-4 mb-lg-0"> <!-- Adjust column size as needed -->
+                <div class="contact-box h-50 d-flex flex-column justify-content-center p-4 p-md-5 animate-on-scroll">
+                    <h4 class="text-center mb-4">Get in Touch Directly</h4>
+                    
+                    <!-- Email -->
+                    <div class="contact-item text-center mb-4">
+                         <a href="mailto:yalishalavanisree@gmail.com" class="contact-icon-wrapper" aria-label="Email me">
+                            <i class="fas fa-envelope contact-icon"></i>
                         </a>
-                    </p>
+                        <p class="contact-info mt-3">
+                            <a href="mailto:yalishalavanisree@gmail.com">yalishalavanisree@gmail.com</a>
+                        </p>
+                    </div>
+                    <!-- LinkedIn -->
+                    <div class="contact-item text-center"> <!-- No mb-4 on the last item -->
+                         <a href="https://www.linkedin.com/in/vanisree-yalishala-275962276/"
+                           target="_blank" rel="noopener noreferrer" class="contact-icon-wrapper" aria-label="View LinkedIn Profile">
+                            <i class="fab fa-linkedin contact-icon"></i>
+                        </a>
+                        <p class="contact-info mt-3">
+                            <a href="https://www.linkedin.com/in/vanisree-yalishala-275962276/"
+                               target="_blank" rel="noopener noreferrer">
+                                LinkedIn Profile
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Right Container: Contact Form -->
+            <div class="col-lg-7"> <!-- Adjust column size as needed -->
+                <div class="contact-box h-80 p-4 p-md-5 animate-on-scroll" data-animation-delay="150"> <!-- Optional delay -->
+                     <h4 class="text-center mb-4">Send a Message</h4>
+                     <!--
+                        IMPORTANT: Using mailto: for form actions is unreliable.
+                        Replace 'YOUR_SERVER_ENDPOINT' with your actual backend script URL
+                        or use a service like Formspree, Netlify Forms, etc.
+                     -->
+                    <form class="contact-form d-flex flex-column h-51" action="https://api.web3forms.com/submit" method="POST">
+
+                        <input type="hidden" name="access_key" value="cffc533e-39ac-40ea-aff7-169c25c45ee3">
+
+                        <div class="form-group mb-3">
+                            <label for="contactName" class="visually-hidden">Your Name</label>
+                            <input type="text" id="contactName" name="name" class="form-control" placeholder="Your Name" required />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="contactEmail" class="visually-hidden">Email Address</label>
+                            <input type="email" id="contactEmail" name="email" class="form-control" placeholder="Email Address" required />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="contactSubject" class="visually-hidden">Subject</label>
+                            <input type="text" id="contactSubject" name="subject" class="form-control" placeholder="Subject (Optional)" />
+                        </div>
+                        <div class="form-group mb-4 flex-grow-1"> <!-- Allow textarea to grow -->
+                             <label for="contactMessage" class="visually-hidden">Your Message</label>
+                            <textarea id="contactMessage" name="message" class="form-control h-100" rows="4" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-submit mt-auto align-self-center mb-2">Send Message</button>
+
+                        <div id="submissionMsg" style="display: none; text-align: center; margin-top: 10px; font-weight: bold;"></div>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -456,6 +496,40 @@
     };
     window.addEventListener("scroll", scrollTrigger);
     scrollTrigger(); // Run once on load
+  });
+
+// Form related code
+
+  document.querySelector('.contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const form = this;
+    const formData = new FormData(form);
+    
+    // Submit the form data using Fetch
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+    })
+    .then(response => {
+      if (response.ok) {
+        // Optionally process the response or show a success message
+        // Then clear the form fields
+        form.reset();
+        let submissionMsgEL=document.getElementById("submissionMsg")
+        submissionMsgEL.textContent="Your message is Sent";
+        submissionMsgEL.style.display="block";
+        
+      } else {
+        // Handle the error response here
+        console.error('Submission failed.');
+        let submissionMsgEL=document.getElementById("submissionMsg")
+        submissionMsgEL.textContent="Your message is Not Sent";
+        submissionMsgEL.style.display="block";
+      }
+    })
+    .catch(error => {
+      console.error('Error occurred during submission:', error);
+    });
   });
     
     </script>
